@@ -24,14 +24,14 @@ class Stitcher:
 
 		if M is None:
 			return None
-		else:
-			(matches, H, status)=M
-			result=cv2.warpPerspective(left, H, (left.shape[1]+right.shape[1],left.shape[0]))
-			result[0:right.shape[0], 0:right.shape[1]]=right
+		
+		(matches, H, status)=M
+		result=cv2.warpPerspective(left, H, (left.shape[1]+right.shape[1],left.shape[0]))
+		result[0:right.shape[0], 0:right.shape[1]]=right
 
-			if showMatches:
-				vis = self.drawMatches(left, right, kpsleft,kpsright,matches,status)
-				
+		if showMatches:
+			vis = self.drawMatches(left, right, kpsleft,kpsright,matches,status)
+			
 		return(result,vis)
 
 	def detectAndDescribe(self, image):
@@ -84,8 +84,8 @@ imageRight=cv2.imread("right.jpg")
 imageLeft = imutils.resize(imageLeft, width=400)
 imageRight = imutils.resize(imageRight, width=400)
 
-stitcher=Stitcher()
-(result,vis)=stitcher.stitch([imageLeft,imageRight],showMatches=True)
+Stitcher=Stitcher()
+(result,vis)=Stitcher.stitch([imageLeft,imageRight],showMatches=True)
 
 cv2.imshow('ImageLeft', imageLeft)
 cv2.imshow('ImageRight', imageRight)
