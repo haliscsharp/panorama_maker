@@ -6,6 +6,9 @@ mainFolder = 'Images'
 myFolders = os.listdir(mainFolder)
 print(myFolders)
 
+finished=0
+wrong=0
+
 for folder in myFolders:
     path = mainFolder +'/'+folder
     images =[]
@@ -20,10 +23,14 @@ for folder in myFolders:
     (status,result)= stitcher.stitch(images)
     if status==cv2.Stitcher_OK:
         print('Done')
+        finished=finished+1
         cv2.imshow(folder,result)
         cv2.waitKey()
         cv2.destroyAllWindows()
     else:
         print('Something went wrong')
+        wrong=wrong+1
+
+print('Successful stitches: ',finished, 'Failed stitches: ',wrong)
 
 
